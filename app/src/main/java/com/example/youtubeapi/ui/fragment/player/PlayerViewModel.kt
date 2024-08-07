@@ -1,4 +1,4 @@
-package com.example.youtubeapi.ui.fragment.video
+package com.example.youtubeapi.ui.fragment.player
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,15 +9,15 @@ import com.example.youtubeapi.data.repositories.YoutubeRepository
 import com.example.youtubeapi.utils.Resource
 import kotlinx.coroutines.launch
 
-class VideoViewModel(private val repository: YoutubeRepository) : ViewModel() {
+class PlayerViewModel(private val repository: YoutubeRepository) : ViewModel() {
 
-    private val _playlists = MutableLiveData<Resource<BaseResponse>>()
-    val playlists: LiveData<Resource<BaseResponse>> get() = _playlists
+    private val _videos = MutableLiveData<Resource<BaseResponse>>()
+    val videos: LiveData<Resource<BaseResponse>> get() = _videos
 
-    fun getPlaylists() {
+    fun getVideos(playlistId: String) {
         viewModelScope.launch {
-            repository.getPlaylists().observeForever {
-                _playlists.postValue(it)
+            repository.getPlaylistDetails(playlistId).observeForever {
+                _videos.postValue(it)
             }
         }
     }

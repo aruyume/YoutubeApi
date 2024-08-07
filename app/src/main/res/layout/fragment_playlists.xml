@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".ui.fragment.video.VideoFragment">
+    tools:context=".ui.fragment.playlists.PlaylistsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_video"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_video" />
+        tools:listitem="@layout/item_playlists" />
 
     <ProgressBar
         android:id="@+id/progressBar"

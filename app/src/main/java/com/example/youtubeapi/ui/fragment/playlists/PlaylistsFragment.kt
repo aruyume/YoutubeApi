@@ -1,21 +1,23 @@
-package com.example.youtubeapi.ui.fragment.video
+package com.example.youtubeapi.ui.fragment.playlists
 
 import android.os.Bundle
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.youtubeapi.R
-import com.example.youtubeapi.databinding.FragmentVideoBinding
+import com.example.youtubeapi.databinding.FragmentPlaylistsBinding
 import com.example.youtubeapi.ui.fragment.base.BaseFragment
-import com.example.youtubeapi.utils.Resource
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class VideoFragment : BaseFragment<FragmentVideoBinding>(FragmentVideoBinding::inflate) {
+class PlaylistsFragment :
+    BaseFragment<FragmentPlaylistsBinding>(FragmentPlaylistsBinding::inflate) {
 
-    private val viewModel by viewModel<VideoViewModel>()
-    private val videoAdapter: VideoAdapter by lazy { VideoAdapter { video ->
-        navigateToPlaylistFragment(video.id)
-    } }
+    private val viewModel by viewModel<PlaylistsViewModel>()
+    private val playlistsAdapter: PlaylistsAdapter by lazy {
+        PlaylistsAdapter { playlists ->
+            navigateToPlaylistDetailsFragment(playlists.id)
+        }
+    }
 
     override fun onViewCreated(view: android.view.View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -26,24 +28,27 @@ class VideoFragment : BaseFragment<FragmentVideoBinding>(FragmentVideoBinding::i
 
     override fun setupObservers() {
         viewModel.playlists.resourceHandler(
-            onSuccess = { data ->
-                videoAdapter.submitList(data.items)
+            isLoading = { visibility ->
+                binding.progressBar.isVisible = visibility
             },
-            state = { state ->
-                binding.progressBar.isVisible = state is Resource.Loading
+            onSuccess = { data ->
+                playlistsAdapter.submitList(data!!.items)
             }
         )
     }
 
     private fun setupRecyclerView() = with(binding.rvVideo) {
         layoutManager = LinearLayoutManager(context)
-        adapter = videoAdapter
+        adapter = playlistsAdapter
     }
 
-    private fun navigateToPlaylistFragment(videoId: String) {
+    private fun navigateToPlaylistDetailsFragment(videoId: String) {
         val bundle = Bundle().apply {
             putString("VIDEO_ID", videoId)
         }
-        findNavController().navigate(R.id.action_videoFragment_to_playlistFragment, bundle)
+        findNavController().navigate(
+            R.id.action_playlistsFragment_to_playlistDetailsFragment,
+            bundle
+        )
     }
 }

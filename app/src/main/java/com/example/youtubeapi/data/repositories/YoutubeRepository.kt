@@ -8,21 +8,23 @@ class YoutubeRepository(
     private val apiService: YoutubeApiService
 ) : BaseRepository() {
 
-    fun getPlaylists() = doRequest {
+    fun getPlaylists(pageToken: String? = null) = doRequest {
         apiService.getPlaylists(
             part = Constants.PART,
             channelId = Constants.CHANNEL_ID,
             apiKey = Constants.API_KEY,
-            maxResults = Constants.MAX_RESULTS
+            maxResults = Constants.MAX_RESULTS,
+            pageToken = pageToken
         )
     }
 
-    fun getPlaylistItems(playlistId: String) = doRequest {
-        apiService.getPlaylistItems(
+    fun getPlaylistDetails(playlistId: String, pageToken: String? = null) = doRequest {
+        apiService.getPlaylistDetails(
             part = Constants.PART,
             playlistId = playlistId,
             apiKey = Constants.API_KEY,
-            maxResults = Constants.MAX_RESULTS
+            maxResults = Constants.MAX_RESULTS,
+            pageToken = pageToken
         )
     }
 }

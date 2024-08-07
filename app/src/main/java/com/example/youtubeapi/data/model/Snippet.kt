@@ -1,8 +1,6 @@
 package com.example.youtubeapi.data.model
 
-
 import com.google.gson.annotations.SerializedName
-import java.io.Serializable
 
 data class Snippet(
     @SerializedName("country")
@@ -18,5 +16,7 @@ data class Snippet(
     @SerializedName("thumbnails")
     val thumbnails: Thumbnails,
     @SerializedName("title")
-    val title: String
+    val title: String,
+    @SerializedName("playlistId")
+    val playlistId: String,
 )

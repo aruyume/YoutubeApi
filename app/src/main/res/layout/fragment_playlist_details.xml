@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dark_gray"
-    tools:context=".ui.fragment.playlist.PlaylistFragment">
+    tools:context=".ui.fragment.playlistDetail.PlaylistDetailsFragment">
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -102,7 +102,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/item_playlist" />
+                    tools:listitem="@layout/item_playlist_details" />
             </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

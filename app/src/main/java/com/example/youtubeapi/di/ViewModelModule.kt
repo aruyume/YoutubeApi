@@ -1,17 +1,20 @@
 package com.example.youtubeapi.di
 
-import com.example.youtubeapi.ui.fragment.playlist.PlaylistViewModel
-import com.example.youtubeapi.ui.fragment.video.VideoViewModel
+import com.example.youtubeapi.ui.fragment.player.PlayerViewModel
+import com.example.youtubeapi.ui.fragment.playlistDetail.PlaylistDetailsViewModel
+import com.example.youtubeapi.ui.fragment.playlists.PlaylistsViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
-val viewModelModule : Module = module {
+val viewModelModule: Module = module {
     viewModel {
-        VideoViewModel(get())
+        PlaylistsViewModel(get())
     }
     viewModel {
-        PlaylistViewModel(get())
+        PlaylistDetailsViewModel(get())
     }
-
+    viewModel {
+        PlayerViewModel(get())
+    }
 }

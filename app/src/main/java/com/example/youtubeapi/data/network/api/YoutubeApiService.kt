@@ -10,15 +10,16 @@ interface YoutubeApiService {
         @Query("part") part: String = "snippet,contentDetails",
         @Query("channelId") channelId: String,
         @Query("key") apiKey: String,
-        @Query("maxResults") maxResults: Int = 20
+        @Query("maxResults") maxResults: Int,
+        @Query("pageToken") pageToken: String? = null
     ): BaseResponse
 
     @GET("playlistItems")
-    suspend fun getPlaylistItems(
+    suspend fun getPlaylistDetails(
         @Query("part") part: String = "snippet,contentDetails",
         @Query("playlistId") playlistId: String,
         @Query("key") apiKey: String,
-        @Query("maxResults") maxResults: Int = 20
+        @Query("maxResults") maxResults: Int,
+        @Query("pageToken") pageToken: String? = null
     ): BaseResponse
-
 }

@@ -1,4 +1,4 @@
-package com.example.youtubeapi.ui.fragment.video
+package com.example.youtubeapi.ui.fragment.playlists
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,21 +7,22 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.youtubeapi.data.model.Item
-import com.example.youtubeapi.databinding.ItemVideoBinding
+import com.example.youtubeapi.databinding.ItemPlaylistsBinding
 
-class VideoAdapter(private val onItemClick: (Item) -> Unit) :
-    ListAdapter<Item, VideoAdapter.VideoViewHolder>(VideoItemCallback()) {
+class PlaylistsAdapter(private val onItemClick: (Item) -> Unit) :
+    ListAdapter<Item, PlaylistsAdapter.PlaylistsViewHolder>(PlaylistsItemCallback()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VideoViewHolder {
-        val binding = ItemVideoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return VideoViewHolder(binding)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaylistsViewHolder {
+        val binding =
+            ItemPlaylistsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return PlaylistsViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: VideoViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: PlaylistsViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
-    inner class VideoViewHolder(private val binding: ItemVideoBinding) :
+    inner class PlaylistsViewHolder(private val binding: ItemPlaylistsBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Item) = with(binding) {
@@ -39,7 +40,7 @@ class VideoAdapter(private val onItemClick: (Item) -> Unit) :
     }
 }
 
-class VideoItemCallback : DiffUtil.ItemCallback<Item>() {
+class PlaylistsItemCallback : DiffUtil.ItemCallback<Item>() {
     override fun areItemsTheSame(oldItem: Item, newItem: Item) = oldItem.id == newItem.id
     override fun areContentsTheSame(oldItem: Item, newItem: Item) = oldItem == newItem
 }

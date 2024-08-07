@@ -1,6 +1,5 @@
 package com.example.youtubeapi.data.model
 
-
 import com.google.gson.annotations.SerializedName
 
 data class BaseResponse(
@@ -11,5 +10,7 @@ data class BaseResponse(
     @SerializedName("kind")
     val kind: String,
     @SerializedName("pageInfo")
-    val pageInfo: PageInfo
+    val pageInfo: PageInfo,
+    @SerializedName("nextPageToken")
+    val nextPageToken: String?
 )

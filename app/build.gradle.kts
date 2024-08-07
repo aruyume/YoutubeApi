@@ -77,4 +77,11 @@ dependencies {
 
     //Glide
     implementation("com.github.bumptech.glide:glide:4.16.0")
+
+    // Youtube Player
+    implementation("com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0")
+
+    // Paging 3
+    implementation("androidx.paging:paging-runtime:3.3.1")
+    implementation ("com.google.android.exoplayer:exoplayer:2.19.1")
 }

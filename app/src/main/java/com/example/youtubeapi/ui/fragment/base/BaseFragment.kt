@@ -30,20 +30,29 @@ abstract class BaseFragment<VB : ViewBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupObservers()
+        setupClickListeners()
+        initViews()
     }
 
     protected open fun setupObservers() {}
+    protected open fun setupClickListeners() {}
+    protected open fun initViews() {}
 
     protected fun <T> LiveData<Resource<T>>.resourceHandler(
-        onSuccess: (data: T) -> Unit,
-        state: (Resource<T>) -> Unit
+        isLoading: (Boolean) -> Unit,
+        onSuccess: (T?) -> Unit,
+        onError: ((String?) -> Unit)? = null
     ) {
         this.observe(viewLifecycleOwner) { resource ->
-            state(resource)
+            isLoading(resource is Resource.Loading)
             when (resource) {
-                is Resource.Error -> showToast(resource.message ?: "Unknown error")
-                is Resource.Success -> resource.data?.let { onSuccess(it) }
-                is Resource.Loading -> {}
+                is Resource.Error -> {
+                    showToast(resource.message)
+                    onError?.invoke(resource.message)
+                }
+                is Resource.Success -> onSuccess(resource.data)
+                is Resource.Loading -> {
+                }
             }
         }
     }
